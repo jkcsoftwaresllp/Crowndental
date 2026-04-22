@@ -4,28 +4,23 @@ import { createLead, getLeads, deleteLead, updateLeadStatus } from "../controlle
 
 const router = express.Router();
 
-// Public endpoint to create a lead from site forms
+// Mounted at /api/leads, so these paths are relative to that base
+
+// POST /api/leads - Public endpoint to create a lead from site forms
 router.post("/", createLead);
 
-// Protected fetch for admin; if 404 persists in client, ensure server restarts
+// GET /api/leads/ping - Simple ping to verify router mount
+router.get("/ping", (req, res) => {
+  res.json({ ok: true, message: "Leads route working" });
+});
+
+// GET /api/leads - Protected fetch for admin
 router.get("/", protect, getLeads);
 
-// Optional public fetch for debugging 404s (can be removed later)
-router.get("/public", async (req, res) => {
-	try {
-		const { default: Lead } = await import("../models/leadModel.js");
-		const leads = await Lead.find().sort({ createdAt: -1 });
-		res.json(leads);
-	} catch (e) {
-		res.status(500).json({ error: e.message });
-	}
-});
+// DELETE /api/leads/:id - Protected delete lead
 router.delete("/:id", protect, deleteLead);
-router.put("/:id", protect, updateLeadStatus);
 
-// Simple ping to verify router mount
-router.get("/ping", (req, res) => {
-	res.json({ ok: true });
-});
+// PUT /api/leads/:id - Protected update lead status
+router.put("/:id", protect, updateLeadStatus);
 
 export default router;

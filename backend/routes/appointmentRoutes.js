@@ -9,16 +9,23 @@ import {
 
 const router = express.Router();
 
-// Public endpoint to create an appointment
+// Mounted at /api/appointments, so these paths are relative to that base
+
+// POST /api/appointments - Public endpoint to create an appointment
 router.post("/", createAppointment);
 
-// Health check for routing/debugging
+// GET /api/appointments/ping - Health check for routing/debugging
 router.get("/ping", (req, res) => {
-  res.json({ ok: true });
+  res.json({ ok: true, message: "Appointments route working" });
 });
 
+// GET /api/appointments - Protected fetch all appointments
 router.get("/", protect, getAppointments);
+
+// DELETE /api/appointments/:id - Protected delete appointment
 router.delete("/:id", protect, deleteAppointment);
+
+// PUT /api/appointments/:id - Protected update appointment status
 router.put("/:id", protect, updateStatus);
 
 export default router;

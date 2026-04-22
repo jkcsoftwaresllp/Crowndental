@@ -11,11 +11,12 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", protect, createTreatment);
-router.get("/", getAllTreatments);
-router.get("/id/:id", getTreatmentById);
-router.get("/:slug", getTreatmentBySlug);
-router.put("/:id", protect, updateTreatment);
-router.delete("/:id",  protect, deleteTreatment);
+// Mounted at /api/treatments, so these paths are relative to that base
+router.post("/", protect, createTreatment);           // POST /api/treatments
+router.get("/", getAllTreatments);                    // GET /api/treatments
+router.get("/id/:id", getTreatmentById);              // GET /api/treatments/id/:id
+router.get("/:slug", getTreatmentBySlug);             // GET /api/treatments/:slug
+router.put("/:id", protect, updateTreatment);         // PUT /api/treatments/:id
+router.delete("/:id", protect, deleteTreatment);      // DELETE /api/treatments/:id
 
 export default router;

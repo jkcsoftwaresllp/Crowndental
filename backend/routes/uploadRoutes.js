@@ -6,7 +6,9 @@ import streamifier from "streamifier";
 const router = express.Router();
 const upload = multer(); // memory storage
 
-// ---------------- MULTIPLE IMAGE UPLOAD ----------------
+// Mounted at /api/uploads, so these paths are relative to that base
+
+// POST /api/uploads/image - Multiple image upload endpoint
 router.post("/image", upload.array("file", 20), async (req, res) => {
   try {
     if (!req.files || req.files.length === 0)

@@ -1,10 +1,13 @@
 import express from "express";
 import Subscriber from "../models/Subscriber.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// Fetch all subscribers
-router.get("/", async (req, res) => {
+// Mounted at /api/subscribers, so these paths are relative to that base
+
+// GET /api/subscribers - Fetch all subscribers (protected)
+router.get("/", protect, async (req, res) => {
   try {
     const list = await Subscriber.find().sort({ date: -1 });
     res.json(list);
@@ -13,8 +16,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Export subscribers as CSV
-router.get("/export/csv", async (req, res) => {
+// GET /api/subscribers/export/csv - Export subscribers as CSV (protected)
+router.get("/export/csv", protect, async (req, res) => {
   try {
     const list = await Subscriber.find().sort({ date: -1 });
 

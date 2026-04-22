@@ -4,10 +4,12 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// Public route
+// Mounted at /api/auth, so these paths are relative to that base
+
+// POST /api/auth/login - Public login route
 router.post("/login", login);
 
-// Protected route
+// PUT /api/auth/change-password - Protected password change route
 router.put("/change-password", protect, changePassword);
 
 export default router;

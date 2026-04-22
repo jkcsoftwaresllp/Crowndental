@@ -4,9 +4,15 @@ import { getGallery, addGallery, deleteGallery } from "../controllers/galleryCon
 
 const router = express.Router();
 
-// Public GET, protected mutations
+// Mounted at /api/gallery, so these paths are relative to that base
+
+// GET /api/gallery - Public gallery fetch
 router.get("/", getGallery);
+
+// POST /api/gallery - Protected gallery add
 router.post("/", protect, addGallery);
+
+// DELETE /api/gallery/:id - Protected gallery delete
 router.delete("/:id", protect, deleteGallery);
 
 export default router;
