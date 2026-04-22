@@ -10,7 +10,7 @@ export default function Doctors() {
     {
       name: "Dr. Anand Chaudhary",
       title: "Chief Dental Surgeon & Director",
-      img: "/Images/male.jpg",
+      img: "/Maledoc.webp",
       badges: ["Implantologist", "Endodontist", "Cosmetic Dentist"],
       exp: 12,
       treatments: 4500,
@@ -19,7 +19,7 @@ export default function Doctors() {
     {
       name: "Dr. Swati Chaudhary",
       title: "Dental Surgeon, Aesthetic Physician & Cosmetologist",
-      img: "/Images/female.jpg",
+      img: "/Images/Femaledoc.webp",
       badges: ["Cosmetologist", "Facial Aesthetics Specialist"],
       exp: 10,
       treatments: 3800,
@@ -28,7 +28,7 @@ export default function Doctors() {
     {
       name: "Dr. Shagun Gupta",
       title: "Dental Surgeon",
-      img: "/Images/female.jpg",
+      img: "👩‍⚕️",
       badges: ["Pediatric Dentist", "Conservative Dentistry"],
       exp: 6,
       treatments: 2100,
@@ -37,7 +37,7 @@ export default function Doctors() {
     {
       name: "Dr. Shashwat Kumar",
       title: "Dental Surgeon",
-      img: "/Images/male.jpg",
+      img: "👨‍⚕️",
       badges: ["General Dentistry", "Root Canal Specialist"],
       exp: 4,
       treatments: 1500,
@@ -114,17 +114,35 @@ export default function Doctors() {
             }}
           >
             {/* IMAGE */}
-            <img
-              src={doc.img}
-              alt={doc.name}
-              style={{
-                width: "100%",
-                height: 340,
-                objectFit: "cover",
-                borderRadius: 16,
-                marginBottom: 15,
-              }}
-            />
+            {doc.img.includes('👨‍⚕️') || doc.img.includes('👩‍⚕️') ? (
+              <div
+                style={{
+                  width: "100%",
+                  height: 340,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 120,
+                  background: "linear-gradient(135deg, #f2ebe0 0%, #e8dcc6 100%)",
+                  borderRadius: 16,
+                  marginBottom: 15,
+                }}
+              >
+                {doc.img}
+              </div>
+            ) : (
+              <img
+                src={doc.img}
+                alt={doc.name}
+                style={{
+                  width: "100%",
+                  height: 340,
+                  objectFit: "cover",
+                  borderRadius: 16,
+                  marginBottom: 15,
+                }}
+              />
+            )}
 
             {/* NAME */}
             <h3 style={{ fontSize: 22, fontWeight: 700, color: "#6f6048" }}>

@@ -48,7 +48,7 @@ export default function Contact() {
             marginBottom: "5px",
           }}
         >
-          <Phone size={20} /> +91 8077961782
+          <Phone size={20} /> +91 80779 61782
         </p>
 
         <p
@@ -60,7 +60,7 @@ export default function Contact() {
             gap: "8px",
           }}
         >
-          <Mail size={20} /> care@crowndental.in
+          <Mail size={20} /> crowndentalhosp@gmail.com
         </p>
       </div>
 
@@ -154,12 +154,13 @@ export default function Contact() {
       >
         <iframe
           title="Crown Dental Location"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.4558943510154!2d81.83594877528358!3d25.438112977569047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399acaca33f61efd%3A0xaf3aaee47cebb6a7!2sGTB%20Nagar%2C%20Kareli%2C%20Prayagraj%2C%20Uttar%20Pradesh%20211016!5e0!3m2!1sen!2sin!4v1701876423456!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d26198.369710779032!2d81.7500061!3d25.4311023!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39853526bea4b871%3A0x130ac70fc2f1b1a5!2sCROWN%20DENTAL%20%7C%20Luxury.Smile.Signature!5e1!3m2!1sen!2sin!4v1776881938318!5m2!1sen!2sin"
           width="100%"
           height="400"
           style={{ border: 0 }}
-          loading="lazy"
           allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
     </div>

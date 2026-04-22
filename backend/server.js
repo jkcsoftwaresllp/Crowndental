@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./config/db.js";
+import seedAdmin from "./scripts/seedAdmin.js";
 import authRoutes from "./routes/authRoutes.js";
 import treatmentRoutes from "./routes/treatmentRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
@@ -14,7 +15,14 @@ import subscriberAdminRoutes from "./routes/subscriberAdminRoutes.js";
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 dotenv.config();
-connectDB();
+
+// Connect to database and seed admin user
+const initializeApp = async () => {
+  await connectDB();
+  await seedAdmin();
+};
+
+initializeApp();
 
 const app = express();
 

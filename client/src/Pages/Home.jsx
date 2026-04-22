@@ -46,7 +46,7 @@ const Home = () => {
           <div className="core-doctors-grid">
             <article className="core-doctor-card reveal-on-scroll">
               <div className="core-doctor-photo">
-                <img src="/Images/male.jpg" alt="Dr Anand" />
+                <img src="/Maledoc.webp" alt="Dr Anand" />
               </div>
               <div className="core-doctor-body">
                 <h3>Dr. Anand Chaudhary</h3>
@@ -62,7 +62,7 @@ const Home = () => {
 
             <article className="core-doctor-card reveal-on-scroll">
               <div className="core-doctor-photo">
-                <img src="/images/female.jpg" alt="Dr Swati" />
+                <img src="/Images/Femaledoc.webp" alt="Dr Swati" />
               </div>
               <div className="core-doctor-body">
                 <h3>Dr. Swati Chaudhary</h3>

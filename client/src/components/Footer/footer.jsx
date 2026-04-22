@@ -58,9 +58,9 @@ const Footer = () => {
           <div className="column">
             <h3 className="title">Contact Us</h3>
             <p>📍 Crown Dental, Prayagraj</p>
-            <p>📞 +91 9910478281</p>
+            <p>📞 +91 80779 61782</p>
             <p>
-              📧 <a href="mailto:care@crowndental.in" className="link">care@crowndental.in</a>
+              📧 <a href="mailto:crowndentalhosp@gmail.com" className="link">crowndentalhosp@gmail.com</a>
             </p>
             <p>🕒 Open Hours: 10:00 AM – 08:00 PM (Daily)</p>
           </div>
@@ -131,8 +131,8 @@ const Footer = () => {
 
             {/* Social Icons */}
             <div className="socials">
-              <a href="https://facebook.com" className="social"><FontAwesomeIcon icon={faFacebookF} /></a>
-              <a href="https://instagram.com" className="social"><FontAwesomeIcon icon={faInstagram} /></a>
+              <a href="https://www.facebook.com/CrownDental" className="social"><FontAwesomeIcon icon={faFacebookF} /></a>
+              <a href="https://www.instagram.com/crown_.dental/" className="social"><FontAwesomeIcon icon={faInstagram} /></a>
               <a href="https://youtube.com" className="social"><FontAwesomeIcon icon={faYoutube} /></a>
             </div>
           </div>
