@@ -12,7 +12,10 @@ import leadRoutes from "./routes/leadRoutes.js";
 import subscriberRoutes from "./routes/subscriberRoutes.js";
 import subscriberAdminRoutes from "./routes/subscriberAdminRoutes.js";
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+// Only disable TLS verification in development
+if (process.env.NODE_ENV === 'development') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+}
 
 dotenv.config();
 
