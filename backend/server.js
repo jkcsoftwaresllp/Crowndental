@@ -77,7 +77,35 @@ const startServer = async () => {
       res.json({ 
         status: "OK", 
         message: "Crown Dental API is running",
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        routes: [
+          'GET /api/health',
+          'POST /api/auth/login',
+          'GET /api/treatments',
+          'GET /api/gallery',
+          'GET /api/appointments',
+          'GET /api/leads',
+          'POST /api/subscribe',
+          'GET /api/subscribers'
+        ]
+      });
+    });
+
+    // 404 handler - must be after all routes
+    app.use((req, res) => {
+      res.status(404).json({
+        error: "Not Found",
+        message: `Route ${req.method} ${req.path} not found`,
+        availableRoutes: [
+          'GET /api/health',
+          'POST /api/auth/login',
+          'GET /api/treatments',
+          'GET /api/gallery',
+          'GET /api/appointments',
+          'GET /api/leads',
+          'POST /api/subscribe',
+          'GET /api/subscribers'
+        ]
       });
     });
 

@@ -134,8 +134,8 @@ export default function Contact() {
           }}
         >
           <MapPin size={20} style={{ marginTop: "3px" }} />
-          C-143/2 1st Floor, in front of Shahnai Palace,<br />
-          GTB Nagar, Kareli, Prayagraj, Uttar Pradesh 211016
+          G-1/5, Near jagriti Chauraha
+           Kalindipuram Prayagraj, Uttar Pradesh 211001
         </p>
       </div>
 

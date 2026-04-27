@@ -22,24 +22,24 @@ export default function About() {
 
   const philosophy = [
     {
+      icon: <Smile size={28} color="#6f6048" />,
+      title: "Smile Design",
+      text: "We don't just treat your tooth — we redesign your whole smile.",
+    },
+    {
       icon: <Heart size={28} color="#6f6048" />,
       title: "Comfort Comes First",
       text: "We create a calm and stress-free environment for every patient.",
     },
     {
-      icon: <Smile size={28} color="#6f6048" />,
-      title: "You Come First",
-      text: "Your comfort, concerns, and expectations guide every treatment.",
+      icon: <Sparkles size={28} color="#6f6048" />,
+      title: "Hygiene & Wellness",
+      text: "We make you chew your food and enjoy the meal like you did as a kid.",
     },
     {
       icon: <Shield size={28} color="#6f6048" />,
       title: "Honesty & Transparency",
       text: "No hidden prices, no confusion — only ethical and clear guidance.",
-    },
-    {
-      icon: <Sparkles size={28} color="#6f6048" />,
-      title: "Care With Heart",
-      text: "Behind every smile transformation is true compassion and passion.",
     },
   ];
 
@@ -139,20 +139,28 @@ export default function About() {
           <div style={{ borderLeft: "3px solid #d2c3b3", paddingLeft: "20px" }}>
             {[
               {
-                year: "2018",
+                year: "2021",
                 text: "Crown Dental was founded with the vision to offer stress-free and ethical dental care.",
               },
               {
-                year: "2020",
+                year: "2022",
                 text: "Introduced advanced cosmetic dentistry and modern digital equipment.",
               },
               {
-                year: "2022",
+                year: "2023",
                 text: "Expanded to a full-service center with specialists in all dental fields.",
               },
               {
                 year: "2024",
-                text: "Recognized as one of the most trusted family dental clinics in the region.",
+                text: "Introduced advanced implantology and smile design services with state-of-the-art technology.",
+              },
+              {
+                year: "2025",
+                text: "Achieved milestone of 10,000+ happy patients and launched laser dentistry services.",
+              },
+              {
+                year: "2026",
+                text: "Recognized as one of the most trusted family dental clinics in the region with 4.9-star rating.",
               },
             ].map((step, idx) => (
               <div

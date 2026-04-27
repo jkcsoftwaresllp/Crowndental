@@ -46,11 +46,11 @@ const Hero = () => {
       rafMap.set(element, id);
     }
 
-    // Scroll-triggered counting (only once)
-    let scrolledStarted = false;
+    // Start counting immediately on page load
+    let hasStarted = false;
     function startCountingOnce() {
-      if (scrolledStarted) return;
-      scrolledStarted = true;
+      if (hasStarted) return;
+      hasStarted = true;
       counters.forEach((counter) => {
         const targetAttr = counter.getAttribute("data-count") || "0";
         const target = +targetAttr;
@@ -59,11 +59,17 @@ const Hero = () => {
       });
     }
 
+    // Start immediately after a short delay to ensure DOM is ready
+    const startTimer = setTimeout(() => {
+      startCountingOnce();
+    }, 300);
+
+    // Also observe for scroll (in case user scrolls away and back)
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) startCountingOnce();
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
     const element = document.querySelector(".hero-trust-badges");
@@ -102,6 +108,7 @@ const Hero = () => {
 
     // cleanup on unmount
     return () => {
+      clearTimeout(startTimer);
       observer.disconnect();
       badgeEls.forEach((badge) => {
         if (badge._cleanupHandlers) {
@@ -120,7 +127,7 @@ const Hero = () => {
     <section
       className="hero"
       style={{
-        backgroundImage: 'url("/Images/herobg.jpg")',
+        backgroundImage: 'url("/Images/herobg.webp")',
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
@@ -168,7 +175,7 @@ const Hero = () => {
           </span>
 
           <span className="badge">
-            ✓ <span className="count" data-count="15">0</span>+ Years Excellence
+            ✓ <span className="count" data-count="7">0</span>+ Years Excellence
           </span>
         </div>
 

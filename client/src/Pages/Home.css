@@ -1,8 +1,8 @@
 /* ============================================
-   Crown Dental – Home Page Essential Styles
+   Crown Dental – Home Page Premium Styles
    ============================================ */
 
-/* -------------- THEME COLORS ---------------- */
+/* -------------- THEME COLORS / TOKENS ---------- */
 :root {
   --soft-white: #faf6ed;
   --ivory-white: #faf3e3;
@@ -12,6 +12,14 @@
   --sage-green: #b3b19a;
   --text-primary: #3d3d3d;
   --text-secondary: #6b6b6b;
+
+  /* Premium accent palette */
+  --gold-accent: #c9a96e;
+  --gold-glow: rgba(201, 169, 110, 0.25);
+  --warm-cream: #f5ead6;
+  --card-glass: rgba(251, 243, 225, 0.65);
+  --card-glass-border: rgba(0, 0, 0, 0.06);
+  --section-transition-height: 80px;
 }
 
 /* -------------- GLOBAL LAYOUT ---------------- */
@@ -22,216 +30,489 @@
 }
 
 section {
-  padding: 90px 0;
+  padding: 100px 0;
+  position: relative;
 }
 
-/* -------------- HEADINGS ---------------- */
+/* -------------- HEADINGS (PREMIUM) ------------ */
 .section-header h2 {
-  font-size: clamp(26px, 4vw, 32px);
+  font-size: clamp(26px, 4vw, 36px);
   color: var(--text-primary);
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  position: relative;
+  display: inline-block;
+}
+
+/* Subtle underline accent on section headings */
+.section-header h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-accent), var(--dusty-rose));
+  border-radius: 2px;
+  margin: 14px auto 0;
+  opacity: 0;
+  transform: scaleX(0);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Animate the underline when parent section is in view */
+.revealed .section-header h2::after,
+section:hover .section-header h2::after,
+.section-header h2::after {
+  opacity: 1;
+  transform: scaleX(1);
+  animation: heading-underline-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heading-underline-in {
+  0% { opacity: 0; transform: scaleX(0); }
+  100% { opacity: 1; transform: scaleX(1); }
 }
 
 .section-header p {
   color: var(--text-secondary);
-  margin-top: 8px;
-  font-size: 16px;
+  margin-top: 12px;
+  font-size: 16.5px;
+  line-height: 1.6;
 }
 
 /* ============================================
-   MEET SENIOR DOCTORS
+   SECTION DIVIDERS — Gradient + curve transitions
+============================================ */
+.core-doctors-section::before,
+.why-choose-section::before,
+.services-section::before,
+.doctors-section::before,
+.testimonials-section::before,
+.facility-section::before,
+.technology-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(248, 241, 227, 0), rgba(248, 241, 227, 0.05));
+  pointer-events: none;
+}
+
+/* ============================================
+   STAGGERED CASCADE REVEAL SYSTEM
+============================================ */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: auto;
+}
+
+/* Stagger children with cascade delay */
+.reveal-on-scroll:nth-child(1) { transition-delay: 0s; }
+.reveal-on-scroll:nth-child(2) { transition-delay: 0.08s; }
+.reveal-on-scroll:nth-child(3) { transition-delay: 0.16s; }
+.reveal-on-scroll:nth-child(4) { transition-delay: 0.24s; }
+.reveal-on-scroll:nth-child(5) { transition-delay: 0.32s; }
+.reveal-on-scroll:nth-child(6) { transition-delay: 0.40s; }
+
+/* ============================================
+   MEET SENIOR DOCTORS — Premium glass cards
 ============================================ */
 .core-doctors-section {
-    background: #f8f1e3;
-    padding: 80px 0;
+  background: linear-gradient(165deg, #f8f1e3 0%, #f3e8d3 50%, #f0e4ce 100%);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+/* Subtle background pattern */
+.core-doctors-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 20% 30%, rgba(201, 169, 110, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(207, 180, 161, 0.06) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 .core-doctors-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  position: relative;
+  z-index: 1;
 }
 
 .core-doctor-card {
-    display: flex;
-    gap: 22px;
-    padding: 28px;
-    background:  #f8f1e3;
-    border-radius: 16px;
-    border: 1px solid rgba(0,0,0,0.08);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-    transition: 0.3s ease;
+  display: flex;
+  gap: 24px;
+  padding: 32px;
+  background: rgba(251, 243, 225, 0.92);
+  border-radius: 20px;
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer sweep on hover */
+.core-doctor-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 169, 110, 0.08),
+    transparent
+  );
+  transition: left 0.7s ease;
+  pointer-events: none;
+}
+
+.core-doctor-card:hover::before {
+  left: 120%;
 }
 
 .core-doctor-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 28px rgba(0,0,0,0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+  border-color: rgba(201, 169, 110, 0.3);
 }
 
-/* PHOTO BOX */
+/* PHOTO BOX — refined */
 .core-doctor-photo {
-    width: 140px;
-    height: 140px;
-    border-radius: 12px;
-    background: #d4c7b6; /* exact beige placeholder */
-    overflow: hidden;
-    flex-shrink: 0;
+  width: 150px;
+  height: 150px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #d4c7b6, #e5dccb);
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.core-doctor-card:hover .core-doctor-photo {
+  transform: scale(1.03);
 }
 
 .core-doctor-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.core-doctor-card:hover .core-doctor-photo img {
+  transform: scale(1.05);
 }
 
 /* TEXT */
 .core-doctor-body h3 {
-    font-size: 22px;
-    font-weight: 700;
-    color: #3d3d3d;
-    margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
 }
 
 .doctor-qualification {
-    font-size: 15px;
-    color: #6b6b6b;
-    margin-bottom: 10px;
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
 }
 
 .core-doctor-body p {
-    font-size: 15px;
-    line-height: 1.55;
-    color: #5a5a5a;
-    margin: 0 0 10px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #5a5a5a;
+  margin: 0 0 10px;
 }
 
-/* BUTTONS (matching screenshot style) */
+/* BUTTONS — premium gold-tone */
 .doc-btn {
-    margin-top: 16px;
-    padding: 10px 22px;
-    border-radius: 8px;
-    border: 1.5px solid #c4b59f;
-    background: #e9dfd0;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    color: #5a554c;
-    transition: all 0.25s ease;
+  margin-top: 16px;
+  padding: 11px 24px;
+  border-radius: 10px;
+  border: 1.5px solid var(--gold-accent);
+  background: linear-gradient(135deg, #f5ead6, #ede2cf);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #5a554c;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.doc-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.doc-btn:hover::after {
+  left: 100%;
 }
 
 .doc-btn:hover {
-    background: #B7AE9A;
-    border-color: #B7AE9A;
+  background: linear-gradient(135deg, var(--gold-accent), #b8956a);
+  border-color: var(--gold-accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 169, 110, 0.3);
 }
 
 /* ============================================
-   WHY CHOOSE US
+   WHY CHOOSE US — Animated icon glow cards
 ============================================ */
 .why-choose-section {
   width: 100%;
-  background: #f6ead9; 
-  padding: 80px 0;
+  background: linear-gradient(170deg, #f6ead9 0%, #f1e3cc 100%);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
+}
+
+/* Soft animated orb background */
+.why-choose-section::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 169, 110, 0.07) 0%, transparent 70%);
+  top: -100px;
+  right: -100px;
+  animation: float-orb 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes float-orb {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-40px, 30px) scale(1.1); }
 }
 
 .why-choose-section .section-header h2 {
-  font-size: 32px;
-  font-weight: 600;
-  color: #3d3d3d;
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 700;
+  color: var(--text-primary);
   margin-bottom: 10px;
 }
 
 .why-choose-section .section-header p {
-  color: #6b6b6b;
+  color: var(--text-secondary);
   margin-top: 0;
 }
 
 .highlights-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 28px;
   margin-top: 40px;
+  position: relative;
+  z-index: 1;
 }
 
 .highlight-card {
-  background: #f7efdf; /* slightly lighter card color */
-  border-radius: 14px;
-  padding: 32px 26px;
+  background: rgba(251, 243, 225, 0.92);
+  border-radius: 18px;
+  padding: 36px 28px;
   text-align: center;
-  border: 1px solid #e5dccb;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
-  transition: all 0.25s ease;
+  border: 1px solid rgba(201, 169, 110, 0.12);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated gradient border on hover */
+.highlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, transparent, var(--gold-accent), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.highlight-card:hover::before {
+  opacity: 1;
 }
 
 .highlight-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.09);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 }
 
-.highlight-card img {
-  width: 54px;
-  height: 54px;
+/* Icon glow effect */
+.why-icon {
+  color: var(--gold-accent) !important;
   margin-bottom: 18px;
-  opacity: 0.9;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.4s ease;
+  filter: drop-shadow(0 0 0px transparent);
+}
+
+.highlight-card:hover .why-icon {
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 12px rgba(201, 169, 110, 0.4));
 }
 
 .highlight-card h3 {
-  color: #3d3d3d;
+  color: var(--text-primary);
   font-size: 20px;
   margin-bottom: 10px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .highlight-card p {
-  color: #6b6b6b;
+  color: var(--text-secondary);
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.55;
   margin: 0;
 }
+
 .service-icon {
-    font-size: 48px;
-    color: #b8b0a5; 
-    display: block;
-    margin: 0 auto 16px;
+  font-size: 48px;
+  color: var(--gold-accent);
+  display: block;
+  margin: 0 auto 16px;
 }
 
-
-
 /* ============================================
-   SERVICES SECTION
+   SERVICES SECTION — Premium image cards
 ============================================ */
 .services-section {
-  background: #f8f1e3;
+  background: linear-gradient(175deg, #f8f1e3 0%, #f5ebd7 100%);
+  padding: 100px 0;
+  position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
 }
 
 .services-grid {
   display: grid;
-  gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  padding: 0 20px;
 }
 
 .service-card {
-  text-align: center;
-  padding: 28px;
-  border-radius: 14px;
-  background: var(--ivory-white);
-  border: 1px solid var(--pearl-beige);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-  transition: 0.25s;
+  text-decoration: none !important;
+  color: inherit !important;
+  display: block !important;
+  background: #fff !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06) !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  position: relative;
+  border: 1px solid rgba(201, 169, 110, 0.1) !important;
+}
+
+.service-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-accent), var(--dusty-rose), var(--sage-green));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card:hover::after {
+  transform: scaleX(1);
 }
 
 .service-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1) !important;
+}
+
+.service-card .service-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card:hover .service-image {
+  transform: scale(1.05);
+}
+
+.service-card > div {
+  padding: 20px;
+}
+
+.service-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  color: #6f6048;
+  font-weight: 700;
+}
+
+.service-card p {
+  margin: 0;
+  font-size: 14.5px;
+  color: #5d5446;
+  line-height: 1.55;
 }
 
 /* ============================================
-   DOCTORS SECTION
+   EXPERT DENTAL TEAM — Glass morphism cards
 ============================================ */
 .doctors-section {
   width: 100%;
-  background:  #f6ead9; 
-  padding: 80px 0;
+  background: linear-gradient(170deg, #f6ead9, #f2e4cf);
+  padding: 100px 0;
+  position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
 }
 
 .doctors-section .section-inner {
@@ -248,44 +529,72 @@ section {
 }
 
 .doctor-card {
-  background: #fbf3e1;
-  padding: 30px 22px;
-  border-radius: 18px;
+  background: rgba(251, 243, 225, 0.92);
+  padding: 32px 24px;
+  border-radius: 20px;
   text-align: center;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  border: 1px solid rgba(0,0,0,0.06);
-  transition: transform .3s ease, box-shadow .3s ease;
-  min-height: 330px; /* FIXES UNEVEN HEIGHT */
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(201, 169, 110, 0.12);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease;
+  min-height: 330px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient top border accent */
+.doctor-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-accent), var(--dusty-rose));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.doctor-card:hover::before {
+  opacity: 1;
 }
 
 .doctor-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.09);
+  border-color: rgba(201, 169, 110, 0.25);
 }
 
-/* IMAGE BOX (PLACEHOLDER OR REAL IMAGE) */
+/* IMAGE BOX */
 .doctor-image-placeholder,
 .doctor-photo {
-  width: 120px;
-  height: 120px;
-  border-radius: 14px;
-  background: #ede2cf;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ede2cf, #e0d5c0);
   margin: 0 auto 20px auto;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 42px;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 3px solid rgba(201, 169, 110, 0.2);
+  transition: transform 0.4s ease, border-color 0.4s ease;
 }
 
-/* When real image is added */
+.doctor-card:hover .doctor-image-placeholder,
+.doctor-card:hover .doctor-photo {
+  transform: scale(1.06);
+  border-color: rgba(201, 169, 110, 0.4);
+}
+
 .doctor-photo img {
   width: 100%;
   height: 100%;
-  border-radius: 14px;
+  border-radius: 50%;
   object-fit: cover;
 }
 
@@ -305,66 +614,156 @@ section {
 
 .doctor-specialization {
   font-size: 15px;
-  color: #b08b65; /* golden brown like reference */
+  color: var(--gold-accent);
   font-weight: 600;
   margin-bottom: 18px;
 }
 
-/* EXPERIENCE BADGE */
+/* EXPERIENCE BADGE — animated shimmer */
 .doctor-experience {
   display: inline-block;
-  background: var(--sage-green);
+  background: linear-gradient(135deg, var(--sage-green), #a3a188);
   color: white;
   font-size: 14px;
-  padding: 7px 18px;
+  padding: 8px 20px;
   border-radius: 30px;
   margin-top: auto;
   font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.doctor-experience::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: badge-shimmer 3s infinite;
+}
+
+@keyframes badge-shimmer {
+  0% { left: -100%; }
+  50% { left: 150%; }
+  100% { left: 150%; }
+}
+
+.doctor-card:hover .doctor-experience {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(179, 177, 154, 0.3);
+}
 
 /* ============================================
-   TESTIMONIALS
+   TESTIMONIALS — Fade edges + premium cards
 ============================================ */
-/* ---------------------- TESTIMONIALS ---------------------- */
 .testimonials-section {
   width: 100%;
-  background: #f8f1e3;
-  padding: 80px 0;
+  background: linear-gradient(175deg, #f8f1e3, #f5ebd7);
+  padding: 100px 0;
+  overflow: hidden;
+  position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }
 
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+.testimonials-scroll-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
   margin-top: 40px;
+  padding: 0;
+}
+
+/* Fade edge overlays for seamless feel */
+.testimonials-scroll-container::before,
+.testimonials-scroll-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.testimonials-scroll-container::before {
+  left: 0;
+  background: linear-gradient(to right, #f8f1e3, transparent);
+}
+
+.testimonials-scroll-container::after {
+  right: 0;
+  background: linear-gradient(to left, #f5ebd7, transparent);
+}
+
+.testimonials-scroll-track {
+  display: flex;
+  gap: 32px;
+  animation: scroll-left 90s linear infinite;
+  width: max-content;
+  padding-left: 32px;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.testimonials-scroll-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 .testimonial-card {
-  background:  #fbf3e1;
-  padding: 28px;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-  border: 1px solid rgba(0,0,0,0.06);
-  transition: 0.3s ease;
+  background: rgba(251, 243, 225, 0.95);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(201, 169, 110, 0.12);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease;
+  min-width: 380px;
+  max-width: 380px;
+  flex-shrink: 0;
+  position: relative;
+  transform: translateZ(0);
+}
+
+/* Quote decorative mark */
+.testimonial-card::before {
+  content: "\201C";
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  font-size: 60px;
+  font-family: Georgia, serif;
+  color: rgba(201, 169, 110, 0.12);
+  line-height: 1;
+  pointer-events: none;
 }
 
 .testimonial-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.1);
-}
-
-.quote-icon {
-  font-size: 32px;
-  color: #d8c5a5;
-  margin-bottom: 14px;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  border-color: rgba(201, 169, 110, 0.25);
 }
 
 .testimonial-text {
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.65;
   color: #4b4b4b;
   margin-bottom: 18px;
+  margin-top: 16px;
+  font-style: italic;
 }
 
 .author {
@@ -374,34 +773,46 @@ section {
 }
 
 .author-avatar {
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: #e5d8c4;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 22px;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover .author-avatar {
+  transform: scale(1.08);
 }
 
 .author-name {
   font-weight: 600;
-  margin: 0;
+  margin: 0 0 4px 0;
   color: #3e3e3e;
+  font-size: 16px;
 }
 
 .author-rating {
   font-size: 14px;
-  color: #d4a853;
+  color: #fbbc04;
+  letter-spacing: 2px;
 }
 
-
 /* ============================
-   OUR MODERN FACILITY SECTION
+   OUR MODERN FACILITY — Float animation cards
 ============================ */
 .facility-section {
-  background: #f6ead9;
-  padding: 80px 0;
+  background: linear-gradient(170deg, #f6ead9, #f2e4cf);
+  padding: 100px 0;
+  position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 .facility-grid {
@@ -414,145 +825,236 @@ section {
 }
 
 .facility-card {
-  background: #fdf6e9;
-  border-radius: 16px;
-  padding: 40px 20px 30px;
+  background: rgba(251, 243, 225, 0.92);
+  border-radius: 20px;
+  padding: 44px 24px 34px;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-  border: 1px solid rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
-  cursor: default;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(201, 169, 110, 0.12);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  text-decoration: none !important;
+  color: inherit !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated bottom gradient bar */
+.facility-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-accent), var(--dusty-rose));
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-50%);
+}
+
+.facility-card:hover::after {
+  width: 60%;
 }
 
 .facility-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  border-color: rgba(201, 169, 110, 0.25);
 }
 
 .facility-icon {
-  font-size: 48px;
-  margin-bottom: 18px;
+  display: block;
+  margin: 0 auto 18px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--gold-accent) !important;
+}
+
+.facility-card:hover .facility-icon {
+  transform: scale(1.15) translateY(-4px);
+  filter: drop-shadow(0 4px 12px rgba(201, 169, 110, 0.3));
 }
 
 .facility-title {
   font-size: 17px;
-  font-weight: 600;
-  color: #3d3d3d;
+  font-weight: 700;
+  color: var(--text-primary);
   margin-top: 10px;
 }
 
-
 /* ============================================
-   TECHNOLOGY
+   TECHNOLOGY — Premium depth cards
 ============================================ */
-  
 .technology-section {
-  background: #f8f1e3;
-  padding: 80px 0;
+  background: linear-gradient(175deg, #f8f1e3, #f5ebd7);
+  padding: 100px 0;
   width: 100%;
+  position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
 }
-
 
 .tech-header {
   text-align: center;
   max-width: 750px;
   margin: 0 auto 50px;
+  padding: 0 20px;
 }
 
 .tech-header h2 {
-  font-size: 32px;
+  font-size: clamp(28px, 4vw, 36px);
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+  position: relative;
+  display: inline-block;
+}
+
+/* Gold underline accent */
+.tech-header h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-accent), var(--dusty-rose));
+  border-radius: 2px;
+  margin: 14px auto 0;
 }
 
 .tech-header p {
-  font-size: 16px;
-  color: #6e6e6e;
+  font-size: 16.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
-
 
 .technology-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
-  width: 90%;
+  gap: 32px;
+  width: 100%;
+  padding: 0 60px;
+  max-width: 1600px;
   margin: 0 auto;
 }
 
 .tech-card {
-  background: #ddc9ac;
-  border-radius: 16px;
-  padding: 36px 26px;
+  background: rgba(251, 243, 225, 0.92);
+  border-radius: 20px;
+  padding: 0;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  transition: 0.3s ease;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  border: 1px solid rgba(201, 169, 110, 0.12);
+  position: relative;
+}
+
+/* Gradient top highlight */
+.tech-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-accent), var(--dusty-rose), var(--sage-green));
+  transform: scaleX(0);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tech-card:hover::before {
+  transform: scaleX(1);
 }
 
 .tech-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-10px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.1);
+  border-color: rgba(201, 169, 110, 0.25);
 }
 
+.tech-image-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e5dccb, #ddd3c2);
+}
 
-.tech-icon {
-  font-size: 48px;
-  margin-bottom: 20px;
+.tech-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tech-card:hover .tech-image {
+  transform: scale(1.08);
 }
 
 .tech-card h3 {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin: 26px 24px 14px;
+  color: var(--text-primary);
 }
 
 .tech-card p {
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.65;
   color: #504d4d;
+  padding: 0 24px 30px;
+  margin: 0;
 }
 
-
 /* ============================================
-   BUTTONS
+   BUTTONS — Premium styling
 ============================================ */
 .btn-secondary {
   display: inline-block;
-  padding: 12px 26px;
-  border-radius: 8px;
-  color: var(--greige);
-  border: 2px solid var(--greige);
+  padding: 13px 28px;
+  border-radius: 10px;
+  color: var(--gold-accent);
+  border: 2px solid var(--gold-accent);
   text-decoration: none;
   font-weight: 600;
-  transition: 0.25s;
+  font-size: 16px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-secondary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.15), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-secondary:hover::before {
+  left: 100%;
 }
 
 .btn-secondary:hover {
-  background: var(--greige);
+  background: var(--gold-accent);
   color: white;
-}
-
-/* ============================================
-   REVEAL ANIMATION
-============================================ */
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: all 0.8s cubic-bezier(.16,1,.3,1);
-}
-
-.reveal-on-scroll.revealed {
-  opacity: 1;
-  transform: translateY(0);
+  border-color: var(--gold-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 169, 110, 0.3);
 }
 
 /* ============================================
    RESPONSIVE
 ============================================ */
-@media(max-width: 768px) {
+@media (max-width: 768px) {
   .section-inner {
     padding: 0 20px;
   }
   section {
-    padding: 60px 0;
+    padding: 70px 0;
   }
   .core-doctors-grid {
     grid-template-columns: 1fr;
@@ -575,14 +1077,25 @@ section {
   }
   .technology-grid {
     grid-template-columns: repeat(2, 1fr);
-    width: 100%;
+    padding: 0 20px;
   }
-  .testimonials-grid {
-    grid-template-columns: 1fr;
+  .testimonial-card {
+    min-width: 320px;
+    max-width: 320px;
+  }
+  .testimonials-scroll-track {
+    animation: scroll-left 60s linear infinite;
+  }
+  .testimonials-scroll-container::before,
+  .testimonials-scroll-container::after {
+    width: 60px;
+  }
+  .services-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 }
 
-@media(max-width: 480px) {
+@media (max-width: 480px) {
   .highlights-grid {
     grid-template-columns: 1fr;
   }
@@ -591,6 +1104,20 @@ section {
   }
   .technology-grid {
     grid-template-columns: 1fr;
+    padding: 0 16px;
+  }
+  .testimonial-card {
+    min-width: 280px;
+    max-width: 280px;
+  }
+  .testimonials-scroll-track {
+    animation: scroll-left 50s linear infinite;
+  }
+  .testimonials-scroll-container::before,
+  .testimonials-scroll-container::after {
+    width: 40px;
+  }
+  .services-grid {
+    grid-template-columns: 1fr;
   }
 }
-
