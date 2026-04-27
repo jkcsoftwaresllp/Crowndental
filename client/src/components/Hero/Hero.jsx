@@ -146,13 +146,13 @@ const Hero = () => {
 
         {/* Title */}
         <h1 className="hero-title reveal-on-scroll">
-          Experience Dental Care Without Fear
+          Pain-Free Dental Treatment You Can Trust in Prayagraj 
+
         </h1>
 
         {/* Subtitle */}
         <p className="hero-subtitle reveal-on-scroll">
-          At Crown Dental Hospital, we combine clinical excellence with genuine compassion.
-          Our modern facility, expert team, and painless procedures ensure your comfort at every step.
+         Pain-free, advanced dental treatments by expert specialists — delivered with modern technology and complete patient comfort.
         </p>
 
         {/* Buttons */}

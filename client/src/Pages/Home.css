@@ -290,6 +290,35 @@ section:hover .section-header h2::after,
   box-shadow: 0 6px 20px rgba(201, 169, 110, 0.3);
 }
 
+.doc-btn-container {
+  text-align: center !important;
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.doc-btn-read-more-inline {
+  display: inline;
+  background: transparent;
+  border: none;
+  color: #b8b0a5;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 0;
+  transition: color 0.25s ease;
+  text-decoration: none;
+  font-family: inherit;
+  line-height: inherit;
+}
+
+.doc-btn-read-more-inline:hover {
+  color: #8a8275;
+  text-decoration: underline;
+}
+
 /* ============================================
    WHY CHOOSE US — Animated icon glow cards
 ============================================ */

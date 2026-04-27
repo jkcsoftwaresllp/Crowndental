@@ -45,6 +45,7 @@ const Home = () => {
   const [leadOpen, setLeadOpen] = useState(false);
   const [treatments, setTreatments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [expandedDoctor, setExpandedDoctor] = useState({ anand: false, swati: false });
 
   useEffect(() => {
     const fetchTreatments = async () => {
@@ -91,15 +92,41 @@ const Home = () => {
                   Founder, Crown Dental | Dental Surgeon | Implant & Smile Design Specialist
                 </p>
                 <p style={{ marginBottom: "16px", lineHeight: "1.6" }}>
-                  Renowned for precision-driven dentistry and aesthetic excellence, Dr. Anand Chaudhary leads Crown Dental with a vision of delivering advanced, patient-centric care. Holding a BDS and MBA in Hospital Administration, he combines clinical expertise with strategic leadership to create a modern, technology-driven dental practice.
+                  Renowned for precision-driven dentistry and aesthetic excellence, Dr. Anand Chaudhary leads Crown Dental with a vision of delivering advanced, patient-centric care.
+                  {!expandedDoctor.anand && (
+                    <>
+                      {" "}
+                      <button 
+                        className="doc-btn-read-more-inline" 
+                        onClick={() => setExpandedDoctor(prev => ({ ...prev, anand: !prev.anand }))}
+                      >
+                        Read More →
+                      </button>
+                    </>
+                  )}
                 </p>
-                <p style={{ marginBottom: "16px", lineHeight: "1.6" }}>
-                  With specialized expertise in implantology, smile design, and laser dentistry, he focuses on minimally invasive, result-oriented treatments tailored to each patient. His approach blends science with artistry—enhancing not just oral health, but overall confidence.
-                </p>
-                <p style={{ fontWeight: "600", marginBottom: "16px", color: "#6f6048" }}>
-                  Signature Expertise: Advanced Implants | Smile Makeovers | Laser Dentistry | Full Mouth Rehabilitation
-                </p>
-                <button className="doc-btn" onClick={() => setLeadOpen(true)}>Book a Consultation</button>
+                {expandedDoctor.anand && (
+                  <>
+                    <p style={{ marginBottom: "16px", lineHeight: "1.6" }}>
+                      Holding a BDS and MBA in Hospital Administration, he combines clinical expertise with strategic leadership to create a modern, technology-driven dental practice.
+                    </p>
+                    <p style={{ marginBottom: "16px", lineHeight: "1.6" }}>
+                      With specialized expertise in implantology, smile design, and laser dentistry, he focuses on minimally invasive, result-oriented treatments tailored to each patient. His approach blends science with artistry—enhancing not just oral health, but overall confidence.
+                    </p>
+                    <p style={{ fontWeight: "600", marginBottom: "16px", color: "#6f6048" }}>
+                      Signature Expertise: Advanced Implants | Smile Makeovers | Laser Dentistry | Full Mouth Rehabilitation
+                    </p>
+                    <button 
+                      className="doc-btn-read-more-inline" 
+                      onClick={() => setExpandedDoctor(prev => ({ ...prev, anand: !prev.anand }))}
+                    >
+                      Read Less ↑
+                    </button>
+                  </>
+                )}
+                <div className="doc-btn-container">
+                  <button className="doc-btn" onClick={() => setLeadOpen(true)}>Book a Consultation</button>
+                </div>
               </div>
             </article>
 
@@ -113,15 +140,41 @@ const Home = () => {
                   Executive Director, AngelLife Cosmetology & Wellness | Aesthetic Physician & Dental Surgeon
                 </p>
                 <p style={{ marginBottom: "16px", lineHeight: "1.6" }}>
-                  Known for her refined aesthetic sense and clinical precision, Dr. Swati Chaudhary brings a sophisticated approach to modern cosmetology and wellness. Holding a BDS, MBA in Hospital Administration, and MSc in Cosmetology, she seamlessly blends medical expertise with strategic leadership.
+                  Known for her refined aesthetic sense and clinical precision, Dr. Swati Chaudhary brings a sophisticated approach to modern cosmetology and wellness.
+                  {!expandedDoctor.swati && (
+                    <>
+                      {" "}
+                      <button 
+                        className="doc-btn-read-more-inline" 
+                        onClick={() => setExpandedDoctor(prev => ({ ...prev, swati: !prev.swati }))}
+                      >
+                        Read More →
+                      </button>
+                    </>
+                  )}
                 </p>
-                <p style={{ marginBottom: "16px", lineHeight: "1.6" }}>
-                  With advanced proficiency in skin rejuvenation, anti-aging therapies, laser treatments, and facial aesthetics, she delivers personalized, result-oriented solutions focused on natural enhancement. Her philosophy combines science with artistry—enhancing beauty while maintaining individuality.
-                </p>
-                <p style={{ fontWeight: "600", marginBottom: "16px", color: "#6f6048" }}>
-                  Signature Expertise: Skin Rejuvenation | Anti-Aging Treatments | Laser Aesthetics | Facial Contouring
-                </p>
-                <button className="doc-btn" onClick={() => setLeadOpen(true)}>Book a Consultation</button>
+                {expandedDoctor.swati && (
+                  <>
+                    <p style={{ marginBottom: "16px", lineHeight: "1.6" }}>
+                      Holding a BDS, MBA in Hospital Administration, and MSc in Cosmetology, she seamlessly blends medical expertise with strategic leadership.
+                    </p>
+                    <p style={{ marginBottom: "16px", lineHeight: "1.6" }}>
+                      With advanced proficiency in skin rejuvenation, anti-aging therapies, laser treatments, and facial aesthetics, she delivers personalized, result-oriented solutions focused on natural enhancement. Her philosophy combines science with artistry—enhancing beauty while maintaining individuality.
+                    </p>
+                    <p style={{ fontWeight: "600", marginBottom: "16px", color: "#6f6048" }}>
+                      Signature Expertise: Skin Rejuvenation | Anti-Aging Treatments | Laser Aesthetics | Facial Contouring
+                    </p>
+                    <button 
+                      className="doc-btn-read-more-inline" 
+                      onClick={() => setExpandedDoctor(prev => ({ ...prev, swati: !prev.swati }))}
+                    >
+                      Read Less ↑
+                    </button>
+                  </>
+                )}
+                <div className="doc-btn-container">
+                  <button className="doc-btn" onClick={() => setLeadOpen(true)}>Book a Consultation</button>
+                </div>
               </div>
             </article>
           </div>
