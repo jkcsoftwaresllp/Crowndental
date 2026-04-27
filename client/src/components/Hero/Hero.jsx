@@ -133,6 +133,13 @@ const Hero = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
+      {/* Mobile-only blurred background image */}
+      <div
+        className="hero-mobile-bg"
+        style={{ backgroundImage: 'url("/Images/mobileview.jpeg")' }}
+        aria-hidden="true"
+      />
+
       <div className="container hero-inner">
 
         {/* Logo */}
